@@ -30,13 +30,12 @@ typedef enum {
                ZoneMapRect: (MKMapRect) zoneRect;  /// or NULL
 
 
-+ (id) quizWithDifficulty: (BYQuizDifficulty) difficulty;
++ (id) randomQuizWithDifficulty: (BYQuizDifficulty) difficulty;
 
 
 @property (readonly) BYQuizDifficulty difficulty;
 @property (readonly) NSString * task;
 @property (readonly) CLLocationCoordinate2D answerCoordinate;
 @property (readonly) MKMapRect lockZoneRect;
-
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "BYQuiz.h"
+#import <MapKit/MapKit.h>
 
 
 @implementation BYQuiz
@@ -18,7 +19,7 @@
     
     
     NSAssert(task.length, @"BYQuiz # initWith - attemp to init with empty task");
-    NSAssert(CLLocationCoordinate2DIsValid(ansCoord) && ( ansCoord.latitude != 0 || ansCoord.longitude != 0 ),
+    NSAssert(( ansCoord.latitude != 0 || ansCoord.longitude != 0 ),
              @"BYQuiz # initWith - attemp to init with incorrect answer coordinate");
     NSAssert(difficulty != BYQuizDifficulty_Undefined, @"BYQuiz # initWith - attemp to init with incorrect difficulty");
     
@@ -43,8 +44,31 @@
 }
 
 
-+ (id) quizWithDifficulty: (BYQuizDifficulty) difficulty {
-    assert(0);
++ (id) randomQuizWithDifficulty: (BYQuizDifficulty) difficulty {
+    switch (difficulty) {
+        case BYQuizDifficulty_Easy:
+            return [[BYQuiz alloc] initWithDescription:@"Where is Ukraine"
+                                      AnswerCoordinate:CLLocationCoordinate2DMake(50, 32)
+                                            Difficulty:BYQuizDifficulty_Easy
+                                           ZoneMapRect:MKMapRectNull];
+            break;
+        case BYQuizDifficulty_Medium:
+            return [[BYQuiz alloc] initWithDescription:@"Where is London"
+                                      AnswerCoordinate:CLLocationCoordinate2DMake(51, 0)
+                                            Difficulty:BYQuizDifficulty_Easy
+                                           ZoneMapRect:MKMapRectNull];
+            break;
+        case BYQuizDifficulty_Hard:
+            return [[BYQuiz alloc] initWithDescription:@"Where is Goteberg"
+                                      AnswerCoordinate:CLLocationCoordinate2DMake(58, 12)
+                                            Difficulty:BYQuizDifficulty_Easy
+                                           ZoneMapRect:MKMapRectNull];
+            break;
+            
+        default:
+            NSAssert(0, @"BYQuiz # randomQuizWithDiff - cannot create quiz with unknown diff");
+            break;
+    }
     return NULL;
 }
 

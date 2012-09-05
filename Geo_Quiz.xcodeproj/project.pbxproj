@@ -31,6 +31,9 @@
 		25503ADE15F692EC002EA931 /* BYQuiz.m in Sources */ = {isa = PBXBuildFile; fileRef = 25503ADC15F692EC002EA931 /* BYQuiz.m */; };
 		25503AE115F6998E002EA931 /* BYGameEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 25503AE015F6998E002EA931 /* BYGameEngine.m */; };
 		25503AE215F6998E002EA931 /* BYGameEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 25503AE015F6998E002EA931 /* BYGameEngine.m */; };
+		25AADFE015F75077008746CE /* ConstantsAndMacros.m in Sources */ = {isa = PBXBuildFile; fileRef = 25AADFDF15F75077008746CE /* ConstantsAndMacros.m */; };
+		25AADFE815F768B1008746CE /* BYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25AADFE715F768B0008746CE /* BYAlertView.m */; };
+		25AADFEA15F76AD1008746CE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25AADFE915F76AD1008746CE /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +76,11 @@
 		25503ADC15F692EC002EA931 /* BYQuiz.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYQuiz.m; sourceTree = "<group>"; };
 		25503ADF15F6998E002EA931 /* BYGameEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYGameEngine.h; sourceTree = "<group>"; };
 		25503AE015F6998E002EA931 /* BYGameEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYGameEngine.m; sourceTree = "<group>"; };
+		25AADFDE15F75077008746CE /* ConstantsAndMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstantsAndMacros.h; sourceTree = "<group>"; };
+		25AADFDF15F75077008746CE /* ConstantsAndMacros.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstantsAndMacros.m; sourceTree = "<group>"; };
+		25AADFE615F768B0008746CE /* BYAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYAlertView.h; sourceTree = "<group>"; };
+		25AADFE715F768B0008746CE /* BYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYAlertView.m; sourceTree = "<group>"; };
+		25AADFE915F76AD1008746CE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25AADFEA15F76AD1008746CE /* CoreLocation.framework in Frameworks */,
 				25503ADA15F68EFC002EA931 /* MapKit.framework in Frameworks */,
 				25503A8B15F67437002EA931 /* UIKit.framework in Frameworks */,
 				25503A8D15F67437002EA931 /* Foundation.framework in Frameworks */,
@@ -103,6 +112,7 @@
 		25503A7B15F67437002EA931 = {
 			isa = PBXGroup;
 			children = (
+				25AADFE915F76AD1008746CE /* CoreLocation.framework */,
 				25503A9015F67437002EA931 /* Geo_Quiz */,
 				25503AB115F67437002EA931 /* Geo_QuizTests */,
 				25503A8915F67437002EA931 /* Frameworks */,
@@ -134,6 +144,7 @@
 		25503A9015F67437002EA931 /* Geo_Quiz */ = {
 			isa = PBXGroup;
 			children = (
+				25AADFE515F7688D008746CE /* Category_Other */,
 				25503AD015F67ACA002EA931 /* Root_View */,
 				25503AC215F67467002EA931 /* Game_Quiz */,
 				25503AC415F67493002EA931 /* Settings */,
@@ -148,6 +159,8 @@
 		25503A9115F67437002EA931 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				25AADFDE15F75077008746CE /* ConstantsAndMacros.h */,
+				25AADFDF15F75077008746CE /* ConstantsAndMacros.m */,
 				25503A9215F67437002EA931 /* Geo_Quiz-Info.plist */,
 				25503A9315F67437002EA931 /* InfoPlist.strings */,
 				25503A9615F67437002EA931 /* main.m */,
@@ -213,6 +226,15 @@
 				25503ACD15F677E9002EA931 /* BYMainScreenSegue.m */,
 			);
 			name = Root_View;
+			sourceTree = "<group>";
+		};
+		25AADFE515F7688D008746CE /* Category_Other */ = {
+			isa = PBXGroup;
+			children = (
+				25AADFE615F768B0008746CE /* BYAlertView.h */,
+				25AADFE715F768B0008746CE /* BYAlertView.m */,
+			);
+			name = Category_Other;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -331,6 +353,8 @@
 				25503AD715F67CB5002EA931 /* BYMainTableViewController.m in Sources */,
 				25503ADD15F692EC002EA931 /* BYQuiz.m in Sources */,
 				25503AE115F6998E002EA931 /* BYGameEngine.m in Sources */,
+				25AADFE015F75077008746CE /* ConstantsAndMacros.m in Sources */,
+				25AADFE815F768B1008746CE /* BYAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,6 +543,7 @@
 				25503ABE15F67437002EA931 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		25503ABF15F67437002EA931 /* Build configuration list for PBXNativeTarget "Geo_QuizTests" */ = {
 			isa = XCConfigurationList;
@@ -527,6 +552,7 @@
 				25503AC115F67437002EA931 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -77,34 +77,45 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="W7v-SL-Yql">
+                                <rect key="frame" x="20" y="45" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="neZ-tN-O0u">
+                                <rect key="frame" x="0.0" y="423" width="72" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pauseButtonHandler:" destination="KNB-B9-hEw" eventType="touchUpInside" id="AgT-RX-7Fd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="helpButton" destination="hAw-ae-vGU" id="rn4-rV-9lF"/>
                         <outlet property="mapView" destination="YZM-0S-fhS" id="n06-w2-wKz"/>
+                        <outlet property="pauseButton" destination="neZ-tN-O0u" id="ZeF-sN-eBY"/>
                         <outlet property="quitButton" destination="5FF-ez-Tqf" id="CxM-6A-5Rq"/>
+                        <outlet property="quizTaskLabel" destination="W7v-SL-Yql" id="bDg-uY-4Pp"/>
+                        <outlet property="timerLabel" destination="vxg-9p-Gdz" id="bFL-28-XD8"/>
+                        <segue destination="qe2-yK-onV" kind="custom" identifier="sToMain" customClass="BYMainScreenSegue" id="gbm-XY-YlB"/>
                     </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="491" y="133"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="BYMainTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BYMainTableViewController.h"/>
-        </class>
-        <class className="BYQuizViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BYQuizViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="helpButtonHandler:"/>
-                <relationship kind="action" name="quitButtonHandler:"/>
-                <relationship kind="outlet" name="helpButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="quitButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -12,14 +12,22 @@
 @class      BYQuiz;
 @protocol   BYGameEngineProtocol;
 
+typedef enum  {
+    BYGameQuizState_NotStarted,
+    BYGameQuizState_Running,
+    BYGameQuizState_Paused,
+    BYGameQuizState_Finished,
+} BYGameQuizState;
 
 @interface BYGameEngine : NSObject {
     
     NSTimeInterval      _quizStartTimeInterval;
     BYQuiz*             _quiz;          /// current quiz
     NSUInteger          _pointsGained;
+    NSUInteger          _pointsGainedForLastQuiz;
     NSUInteger          _numberQuiz;
     NSTimer*            _quizFailTimer;
+    BYGameQuizState     _state;
 }
 
 - (id) init;
@@ -28,14 +36,17 @@
 - (void) pauseQuiz;     /// go background
 - (void) startQuiz;     /// come back from bgd
 
+- (void) startNewGame;
 - (void) startNewQuiz;
 
+- (BOOL) canStartNewQuiz;
 - (void) processQuizAnswerCoordinate: (CLLocationCoordinate2D) coordinate; /// user tapped mapView
 
-@property (readonly) NSTimeInterval     quizTimePassed;
+@property (readonly) NSTimeInterval     quizTimeLeft;
 @property (readonly) NSString*          quizTask;
 @property (readonly) NSUInteger         totalPoints;
 @property (readonly) NSUInteger         pointsForLastQuiz;
+@property (readonly) BYGameQuizState    gameQuizState;
 
 @property (weak) id <BYGameEngineProtocol> delegate;
 
@@ -49,6 +60,7 @@
 
 - (void) BYGameEngineTimeRanOut:        (BYGameEngine*) engine;
 - (void) BYGameEngineLastQuizFinished:  (BYGameEngine*) engine;
+- (void) BYGameEngineQuizStarted:       (BYGameEngine*) engine;
 - (void) BYGameEngineQuizFinished:      (BYGameEngine*) engine;
 
 @end

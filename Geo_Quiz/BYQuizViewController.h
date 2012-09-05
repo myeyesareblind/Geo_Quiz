@@ -10,13 +10,19 @@
 
 @class MKMapView;
 @class BYGameEngine;
+@protocol BYGameEngineProtocol;
 
-@interface BYQuizViewController : UIViewController {
-    BYGameEngine *_gameEngine;
+
+@interface BYQuizViewController : UIViewController <BYGameEngineProtocol> {
+    BYGameEngine*       _gameEngine;
+    NSTimer*            _viewRefreshTimer;
 }
 
-@property (nonatomic, weak) IBOutlet UIButton *quitButton;
-@property (nonatomic, weak) IBOutlet UIButton *helpButton;
-@property (nonatomic, weak) IBOutlet MKMapView *mapView;
+@property (nonatomic, weak) IBOutlet UIButton*      quitButton;
+@property (nonatomic, weak) IBOutlet UIButton*      helpButton;
+@property (nonatomic, weak) IBOutlet UIButton*      pauseButton;
+@property (nonatomic, weak) IBOutlet MKMapView*     mapView;
+@property (nonatomic, weak) IBOutlet UILabel*       timerLabel;
+@property (nonatomic, weak) IBOutlet UILabel*     quizTaskLabel;
 
 @end

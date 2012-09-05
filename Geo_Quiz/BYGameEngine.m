@@ -9,13 +9,15 @@
 #import "BYGameEngine.h"
 #import "BYQuiz.h"
 
-const   NSUInteger          NumberOfQuizesPerRound     =   5;
+const   NSUInteger          NumberOfQuizesPerRound     =   2;
 const   NSUInteger          QuizDifficultyMultiplier   =   500;
 const   NSTimeInterval      TimePerQuiz                =   30.0; /// seconds
+const   NSUInteger          CBY_MaxDistance            =   226; /// sqrt( 2 * 160 * 160);
 
 @interface BYGameEngine ()
 
 - (void) quizFailHandler;
+- (NSUInteger)  _pointsForQuiz: (BYQuiz *) quiz WithAnswer: (CLLocationCoordinate2D) answCoord;
 
 @end
 
@@ -23,6 +25,9 @@ const   NSTimeInterval      TimePerQuiz                =   30.0; /// seconds
 @implementation BYGameEngine
 
 @synthesize delegate;
+@synthesize totalPoints         = _pointsGained;
+@synthesize pointsForLastQuiz   = _pointsForLastQuiz;
+
 
 - (id) init {
     self = [super init];
@@ -33,7 +38,7 @@ const   NSTimeInterval      TimePerQuiz                =   30.0; /// seconds
 }
 
 - (void) reload {
-    
+    _state                  = BYGameQuizState_NotStarted;
     _pointsGained           = 0;
     _quiz                   = NULL;
     _numberQuiz             = 0;
@@ -42,13 +47,23 @@ const   NSTimeInterval      TimePerQuiz                =   30.0; /// seconds
     [_quizFailTimer invalidate];
 }
 
+- (BYGameQuizState) gameQuizState {
+    return _state;
+}
 
 - (NSString *) quizTask {
     return _quiz.task;
 }
 
-- (NSTimeInterval) quizTimePassed {
-    return ([NSDate timeIntervalSinceReferenceDate] - _quizStartTimeInterval);
+- (NSTimeInterval) quizTimeLeft {
+    
+    return (TimePerQuiz - (
+            [NSDate timeIntervalSinceReferenceDate] - _quizStartTimeInterval)); /// time passed
+}
+
+- (BOOL) canStartNewQuiz {
+    return (_state == BYGameQuizState_Running
+            && _numberQuiz < (NumberOfQuizesPerRound * BYQuizDifficulty_Hard));
 }
 
 
@@ -60,8 +75,15 @@ const   NSTimeInterval      TimePerQuiz                =   30.0; /// seconds
     
 }
 
+
+- (void) startNewGame {
+    [self reload];
+    _state                 = BYGameQuizState_Running;
+}
+
 - (void) startNewQuiz {
-    _numberQuiz ++;
+    NSAssert( [self canStartNewQuiz],
+             @"Trying to start quiz, start new game first, or check for quiz counter");
     
     _quizStartTimeInterval = [NSDate timeIntervalSinceReferenceDate];
     _quizFailTimer         = [NSTimer timerWithTimeInterval:TimePerQuiz
@@ -69,11 +91,15 @@ const   NSTimeInterval      TimePerQuiz                =   30.0; /// seconds
                                                    selector:@selector(quizFailHandler)
                                                    userInfo:NULL
                                                     repeats:NO];
+    _quiz                  = [BYQuiz randomQuizWithDifficulty: [self _currentQuizDifficulty]];
+    _pointsGainedForLastQuiz = 0;
+    
+    _numberQuiz ++;
+    [delegate BYGameEngineQuizStarted: self];
 }
 
 
 - (void) quizFailHandler {
-    
     [delegate BYGameEngineTimeRanOut: self];
 }
 
@@ -84,23 +110,38 @@ const   NSTimeInterval      TimePerQuiz                =   30.0; /// seconds
     [_quizFailTimer invalidate];
     
     /// process quiz, get poins
+    _pointsForLastQuiz = [self _pointsForQuiz: _quiz
+                                   WithAnswer: coordinate];
+    _pointsGained += _pointsForLastQuiz;
     
     [delegate BYGameEngineQuizFinished: self];
     
     /// check for if this is last quiz
-    if ( _numberQuiz == NumberOfQuizesPerRound * BYQuizDifficulty_Hard - 1) {
+    if ( _numberQuiz == NumberOfQuizesPerRound * BYQuizDifficulty_Hard) {
+        
+        _state  = BYGameQuizState_Finished;
         
         [delegate BYGameEngineLastQuizFinished: self];
         
-        [self reload];
         return ;
     }
-    
 }
 
 
+
+- (NSUInteger)  _pointsForQuiz: (BYQuiz *) quiz WithAnswer: (CLLocationCoordinate2D) answCoord {
+    /// get distance etc
+    double distance = sqrt( pow(abs(quiz.answerCoordinate.latitude - answCoord.latitude),2)
+                           +  pow(abs(quiz.answerCoordinate.longitude - answCoord.longitude),2));
+    float distancePercent = 1 - distance / CBY_MaxDistance;
+    
+    return  distancePercent * quiz.difficulty * QuizDifficultyMultiplier;
+}
+
+
+
 - (BYQuizDifficulty) _currentQuizDifficulty {
-    return BYQuizDifficulty_Undefined + ( _numberQuiz % NumberOfQuizesPerRound);
+    return 1 + ( _numberQuiz / NumberOfQuizesPerRound);
 }
 
 
