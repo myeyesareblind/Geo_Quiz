@@ -13,15 +13,17 @@
 @protocol   BYGameEngineProtocol;
 
 typedef enum  {
-    BYGameQuizState_NotStarted,
+    BYGameQuizState_NotStarted,         /// initial state
     BYGameQuizState_Running,
-    BYGameQuizState_Paused,
-    BYGameQuizState_Finished,
+    BYGameQuizState_Paused,             /// will be set to pause on bnt handler or appDidEnterBgd
+    BYGameQuizState_AnimationRunnig,    /// showing user answer / correct answer
+    BYGameQuizState_Finished,           /// game is waiting for user input
 } BYGameQuizState;
 
 @interface BYGameEngine : NSObject {
     
     NSTimeInterval      _quizStartTimeInterval;
+    NSTimeInterval      _quizPauseTimeLeft;
     BYQuiz*             _quiz;          /// current quiz
     NSUInteger          _pointsGained;
     NSUInteger          _pointsGainedForLastQuiz;
@@ -61,6 +63,7 @@ typedef enum  {
 - (void) BYGameEngineTimeRanOut:        (BYGameEngine*) engine;
 - (void) BYGameEngineLastQuizFinished:  (BYGameEngine*) engine;
 - (void) BYGameEngineQuizStarted:       (BYGameEngine*) engine;
+- (void) BYGameEngineProcessQuizAnswerCoordinateAnimation: (CLLocationCoordinate2D) quizAnswerCoord;
 - (void) BYGameEngineQuizFinished:      (BYGameEngine*) engine;
 
 @end

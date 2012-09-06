@@ -7,15 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BYGameEngine.h"
+
 
 @class MKMapView;
-@class BYGameEngine;
-@protocol BYGameEngineProtocol;
+
+typedef void (^Block)();
 
 
-@interface BYQuizViewController : UIViewController <BYGameEngineProtocol> {
+@interface BYQuizViewController : UIViewController <BYGameEngineProtocol, MKMapViewDelegate> {
     BYGameEngine*       _gameEngine;
     NSTimer*            _viewRefreshTimer;
+
+    Block               _onQuizFinishedSelector;
 }
 
 @property (nonatomic, weak) IBOutlet UIButton*      quitButton;

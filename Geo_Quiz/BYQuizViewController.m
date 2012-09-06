@@ -10,8 +10,11 @@
 #import "BYQuizViewController.h"
 #import "BYGameEngine.h"
 #import "BYAlertView.h"
+#import "BYAnnotation.h"
 
-const float CBY_viewUpdateTimerInterval = 0.2f;
+const float CBY_viewUpdateTimerInterval     = 0.2f;
+const int   CBY_annotationExlamationMark    = 5655;
+const int   CBY_annotationQuestionMark      = 5412;
 
 @interface BYQuizViewController ()
 -(IBAction)quitButtonHandler: (id)sender;
@@ -22,6 +25,10 @@ const float CBY_viewUpdateTimerInterval = 0.2f;
 - (void) tapGestureHandle: (UIGestureRecognizer*) gesture;
 
 - (void) _updateViews;
+- (void) _removeMapViewAnnotations;
+- (void) _addQuestionMarkAnnotationAtPoint: (CLLocationCoordinate2D) pnt;
+- (void) _addExlamationMarkAnnotationAtPoint: (CLLocationCoordinate2D) pnt;
+
 
 - (void) pauseGame;
 - (void) resumeGame;
@@ -126,18 +133,26 @@ const float CBY_viewUpdateTimerInterval = 0.2f;
 }
 
 - (IBAction)pauseButtonHandler:(id)sender {
-    
+    if (_gameEngine.gameQuizState == BYGameQuizState_Paused) {
+        [self resumeGame];
+    } else if (_gameEngine.gameQuizState == BYGameQuizState_Running) {
+        [self pauseGame];
+    }
 }
 
 - (void) tapGestureHandle:(UIGestureRecognizer *)gesture {
-    
-    if (gesture.state == UIGestureRecognizerStateRecognized) {
-        CGPoint onViewPoint = [gesture locationInView: _mapView];
-        CLLocationCoordinate2D onMapPoint = [_mapView convertPoint:onViewPoint
-                                              toCoordinateFromView:_mapView];
-        
-        BYLOG(@"onMapCoordinate: %@", NSStringFromCLLocationCoordinate2d(onMapPoint));
-        [_gameEngine processQuizAnswerCoordinate: onMapPoint];
+    if (_gameEngine.gameQuizState == BYGameQuizState_Running) {
+        if (gesture.state == UIGestureRecognizerStateRecognized) {
+            CGPoint onViewPoint = [gesture locationInView: _mapView];
+            CLLocationCoordinate2D onMapPoint = [_mapView convertPoint:onViewPoint
+                                                  toCoordinateFromView:_mapView];
+            
+            BYLOG(@"onMapCoordinate: %@", NSStringFromCLLocationCoordinate2d(onMapPoint));
+            [self _addQuestionMarkAnnotationAtPoint: onMapPoint];
+            [_gameEngine processQuizAnswerCoordinate: onMapPoint];
+        }
+    } else {
+        BYLOG(@"cant process tap gesture while game is not running");
     }
 }
 
@@ -153,16 +168,18 @@ const float CBY_viewUpdateTimerInterval = 0.2f;
 
 
 - (void) pauseGame {
-    
+    [_gameEngine pauseQuiz];
 }
 
+
 - (void) resumeGame {
-    
+    [_gameEngine startQuiz];
 }
 
 #pragma mark - BYGameEngineDelegate
 
 - (void) BYGameEngineQuizStarted:(BYGameEngine *)engine {
+    [self _removeMapViewAnnotations];
     [self _updateViews];
 }
 
@@ -175,7 +192,33 @@ const float CBY_viewUpdateTimerInterval = 0.2f;
 
 - (void) BYGameEngineQuizFinished:(BYGameEngine *)engine {
     [self _updateViews];
+    
+    /// wait for scroll animation of mapview to finish
 
+    
+    _onQuizFinishedSelector = [ ^{
+    NSString *pointsInformation = [NSString stringWithFormat: NSLocalizedString(@"kPoint gained %d", NULL), _gameEngine.pointsForLastQuiz ];
+    
+    /// show alertView with points gained and next button
+    /// if this quiz was last one, then show finish dialogue
+    BYAlertView* alertView = [[BYAlertView alloc] initWithTitle:NSLocalizedString(@"kQuizFinished_alertViewTitle", NULL)
+                                                        message:pointsInformation
+                                                     completion:^(BOOL cancel, NSInteger buttonIndex){
+                                                         if ([_gameEngine canStartNewQuiz])  /// this quiz might be last one
+                                                             [_gameEngine startNewQuiz];
+                                                     }
+                                              cancelButtonTitle:NSLocalizedString(@"kOK", NULL)
+                                              otherButtonTitles:nil];
+    [alertView show];
+    } copy];
+}
+
+
+- (void) BYGameEngineLastQuizFinished:(BYGameEngine *)engine {
+    [self _updateViews];
+    
+    /// wait for scroll animation of mapview to finish
+    _onQuizFinishedSelector = [^{
     NSString *pointsInformation = [NSString stringWithFormat: NSLocalizedString(@"kPoint gained %d", NULL), _gameEngine.pointsForLastQuiz ];
     
     /// show alertView with points gained and next button
@@ -183,35 +226,89 @@ const float CBY_viewUpdateTimerInterval = 0.2f;
     BYAlertView* alertView = [[BYAlertView alloc] initWithTitle:NSLocalizedString(@"kQuizFinished_alertViewTitle", NULL)
                                                         message:pointsInformation
                                                      completion:^(BOOL cancel, NSInteger buttonIndex ){
-                                                         if ([_gameEngine canStartNewQuiz])  /// this quiz might be last one
-                                                             [_gameEngine startNewQuiz];
-                                                         else {
+
                                                              /// propose to enter username and show points / overall place
                                                              NSString *pointsInformation = [NSString stringWithFormat: NSLocalizedString(@"kPoint gained %d", NULL), _gameEngine.totalPoints];
                                                              BYAlertView* newGameAlertView = [[BYAlertView alloc] initWithTitle:NSLocalizedString(@"kGaneFinished_alertViewTitle", NULL)
-                                                                                                                 message:pointsInformation
-                                                                                                              completion:^(BOOL cancel, NSInteger buttonIndex){
-                                                                                                                  if (cancel) {
-                                                                                                                      [self quitButtonHandler: NULL];
-                                                                                                                  } else {
-                                                                                                                      [_gameEngine startNewGame];
-                                                                                                                      [_gameEngine startNewQuiz];
-                                                                                                                  }
-                                                                                                              }
-                                                                                                       cancelButtonTitle:NSLocalizedString(@"kQuit", NULL)
-                                                                                                       otherButtonTitles:NSLocalizedString(@"kStartNewGame_alertViewButton", NULL), nil];
+                                                                                                                        message:pointsInformation
+                                                                                                                     completion:^(BOOL cancel, NSInteger buttonIndex){
+                                                                                                                         if (cancel) {
+                                                                                                                             [self quitButtonHandler: NULL];
+                                                                                                                         } else {
+                                                                                                                             [_gameEngine startNewGame];
+                                                                                                                             [_gameEngine startNewQuiz];
+                                                                                                                         }
+                                                                                                                     }
+                                                                                                              cancelButtonTitle:NSLocalizedString(@"kQuit", NULL)
+                                                                                                              otherButtonTitles:NSLocalizedString(@"kStartNewGame_alertViewButton", NULL), nil];
                                                              [newGameAlertView show];
-                                                         }
                                                      }
                                               cancelButtonTitle:NSLocalizedString(@"kOK", NULL)
                                               otherButtonTitles:nil];
-    [alertView show];
+        [alertView show];
+    } copy]; /// block
+}
+
+- (void) BYGameEngineProcessQuizAnswerCoordinateAnimation:(CLLocationCoordinate2D)quizAnswerCoord {
+    [self _addExlamationMarkAnnotationAtPoint: quizAnswerCoord];
+    if ( CLLocationCoordinateAreEqual(_mapView.centerCoordinate, quizAnswerCoord) ) {
+        _onQuizFinishedSelector();
+        _onQuizFinishedSelector = NULL;
+    } else {
+        [_mapView setCenterCoordinate: quizAnswerCoord
+                             animated: YES];
+    }
 }
 
 
-- (void) BYGameEngineLastQuizFinished:(BYGameEngine *)engine {
+#pragma mark - MKMapView methods
+- (MKAnnotationView*) mapView:(MKMapView *)mapView
+            viewForAnnotation:(id<MKAnnotation>)annotation {
     
+    static NSString * const exlViewID = @"!";
+    static NSString * const queViewID = @"?";
+    
+    BYAnnotation*  ann      = (BYAnnotation*) annotation;
+    NSString*      viewID   = ann.tag == CBY_annotationExlamationMark ? exlViewID : queViewID;
+    
+    MKAnnotationView *annView = [_mapView dequeueReusableAnnotationViewWithIdentifier: viewID];
+    if (annView == NULL) {
+        annView = [[MKAnnotationView alloc] initWithAnnotation:annotation
+                                               reuseIdentifier:viewID];
+        UIImage * im = [UIImage imageNamed: [NSString stringWithFormat:@"%@.png", viewID]];
+        annView.image = im;
+    }
+    annView.annotation = annotation;
+    return annView;
 }
+
+
+- (void) mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
+    if (animated) {
+        _onQuizFinishedSelector();
+        _onQuizFinishedSelector = NULL;
+    }
+}
+
+- (void) _removeMapViewAnnotations {
+    NSArray *annots = [_mapView annotations];
+    [_mapView removeAnnotations:annots];
+}
+
+
+- (void) _addExlamationMarkAnnotationAtPoint:(CLLocationCoordinate2D)pnt {
+    [_mapView addAnnotation: [[BYAnnotation alloc] initWithCoordinate:pnt
+                                                                  Tag:CBY_annotationExlamationMark]];
+    [_mapView setNeedsDisplay];
+}
+
+
+- (void) _addQuestionMarkAnnotationAtPoint:(CLLocationCoordinate2D)pnt {
+    [_mapView addAnnotation: [[BYAnnotation alloc] initWithCoordinate:pnt
+                                                                  Tag:CBY_annotationQuestionMark]];
+    [_mapView setNeedsDisplay];
+}
+
 
 - (void) dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver: self];

@@ -31,6 +31,10 @@
 		25503ADE15F692EC002EA931 /* BYQuiz.m in Sources */ = {isa = PBXBuildFile; fileRef = 25503ADC15F692EC002EA931 /* BYQuiz.m */; };
 		25503AE115F6998E002EA931 /* BYGameEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 25503AE015F6998E002EA931 /* BYGameEngine.m */; };
 		25503AE215F6998E002EA931 /* BYGameEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 25503AE015F6998E002EA931 /* BYGameEngine.m */; };
+		25A9D04715F9004A00FB78C2 /* ?.png in Resources */ = {isa = PBXBuildFile; fileRef = 25A9D04515F9004A00FB78C2 /* ?.png */; };
+		25A9D04A15F9016900FB78C2 /* !.png in Resources */ = {isa = PBXBuildFile; fileRef = 25A9D04915F9016900FB78C2 /* !.png */; };
+		25A9D05015F9054200FB78C2 /* BYAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A9D04F15F9054200FB78C2 /* BYAnnotation.m */; };
+		25A9D05215F9525E00FB78C2 /* 773__vitriolix__kick.wav in Resources */ = {isa = PBXBuildFile; fileRef = 25A9D05115F9525E00FB78C2 /* 773__vitriolix__kick.wav */; };
 		25AADFE015F75077008746CE /* ConstantsAndMacros.m in Sources */ = {isa = PBXBuildFile; fileRef = 25AADFDF15F75077008746CE /* ConstantsAndMacros.m */; };
 		25AADFE815F768B1008746CE /* BYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25AADFE715F768B0008746CE /* BYAlertView.m */; };
 		25AADFEA15F76AD1008746CE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25AADFE915F76AD1008746CE /* CoreLocation.framework */; };
@@ -76,6 +80,11 @@
 		25503ADC15F692EC002EA931 /* BYQuiz.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYQuiz.m; sourceTree = "<group>"; };
 		25503ADF15F6998E002EA931 /* BYGameEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYGameEngine.h; sourceTree = "<group>"; };
 		25503AE015F6998E002EA931 /* BYGameEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYGameEngine.m; sourceTree = "<group>"; };
+		25A9D04515F9004A00FB78C2 /* ?.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "?.png"; path = "Geo_Quiz/Resources/?.png"; sourceTree = "<group>"; };
+		25A9D04915F9016900FB78C2 /* !.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "!.png"; path = "Geo_Quiz/Resources/!.png"; sourceTree = "<group>"; };
+		25A9D04E15F9054200FB78C2 /* BYAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYAnnotation.h; sourceTree = "<group>"; };
+		25A9D04F15F9054200FB78C2 /* BYAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYAnnotation.m; sourceTree = "<group>"; };
+		25A9D05115F9525E00FB78C2 /* 773__vitriolix__kick.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = 773__vitriolix__kick.wav; path = Geo_Quiz/Resources/773__vitriolix__kick.wav; sourceTree = "<group>"; };
 		25AADFDE15F75077008746CE /* ConstantsAndMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstantsAndMacros.h; sourceTree = "<group>"; };
 		25AADFDF15F75077008746CE /* ConstantsAndMacros.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstantsAndMacros.m; sourceTree = "<group>"; };
 		25AADFE615F768B0008746CE /* BYAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYAlertView.h; sourceTree = "<group>"; };
@@ -112,6 +121,7 @@
 		25503A7B15F67437002EA931 = {
 			isa = PBXGroup;
 			children = (
+				25A9D04315F8FFF600FB78C2 /* Resources */,
 				25AADFE915F76AD1008746CE /* CoreLocation.framework */,
 				25503A9015F67437002EA931 /* Geo_Quiz */,
 				25503AB115F67437002EA931 /* Geo_QuizTests */,
@@ -197,6 +207,8 @@
 				25503AE015F6998E002EA931 /* BYGameEngine.m */,
 				25503AC515F674E9002EA931 /* BYQuizViewController.h */,
 				25503AC615F674E9002EA931 /* BYQuizViewController.m */,
+				25A9D04E15F9054200FB78C2 /* BYAnnotation.h */,
+				25A9D04F15F9054200FB78C2 /* BYAnnotation.m */,
 			);
 			name = Game_Quiz;
 			sourceTree = "<group>";
@@ -226,6 +238,16 @@
 				25503ACD15F677E9002EA931 /* BYMainScreenSegue.m */,
 			);
 			name = Root_View;
+			sourceTree = "<group>";
+		};
+		25A9D04315F8FFF600FB78C2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				25A9D05115F9525E00FB78C2 /* 773__vitriolix__kick.wav */,
+				25A9D04515F9004A00FB78C2 /* ?.png */,
+				25A9D04915F9016900FB78C2 /* !.png */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		25AADFE515F7688D008746CE /* Category_Other */ = {
@@ -312,6 +334,9 @@
 				25503A9515F67437002EA931 /* InfoPlist.strings in Resources */,
 				25503A9E15F67437002EA931 /* MainStoryboard_iPhone.storyboard in Resources */,
 				25503AA115F67437002EA931 /* MainStoryboard_iPad.storyboard in Resources */,
+				25A9D04715F9004A00FB78C2 /* ?.png in Resources */,
+				25A9D04A15F9016900FB78C2 /* !.png in Resources */,
+				25A9D05215F9525E00FB78C2 /* 773__vitriolix__kick.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +380,7 @@
 				25503AE115F6998E002EA931 /* BYGameEngine.m in Sources */,
 				25AADFE015F75077008746CE /* ConstantsAndMacros.m in Sources */,
 				25AADFE815F768B1008746CE /* BYAlertView.m in Sources */,
+				25A9D05015F9054200FB78C2 /* BYAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,6 +500,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Geo_Quiz/Geo_Quiz-Prefix.pch";
 				INFOPLIST_FILE = "Geo_Quiz/Geo_Quiz-Info.plist";
+				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

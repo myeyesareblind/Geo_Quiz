@@ -21,34 +21,34 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Geo_Quiz/BYQuizViewController.h"
-         timestampString = "368530948.457831"
+         timestampString = "368658032.008672"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "15"
-         endingLineNumber = "15">
+         startingLineNumber = "17"
+         endingLineNumber = "17">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Geo_Quiz/BYQuizViewController.h"
-         timestampString = "368530948.457831"
+         timestampString = "368658032.008672"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "15"
-         endingLineNumber = "15">
+         startingLineNumber = "17"
+         endingLineNumber = "17">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Geo_Quiz/BYQuizViewController.m"
-         timestampString = "368571972.283429"
+         timestampString = "368658032.008672"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "129"
-         endingLineNumber = "129"
-         landmarkName = "-tapGestureHandle:"
+         startingLineNumber = "138"
+         endingLineNumber = "138"
+         landmarkName = "-pauseButtonHandler:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -56,50 +56,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Geo_Quiz/BYQuizViewController.m"
-         timestampString = "368571972.283429"
+         timestampString = "368658032.008672"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "137"
-         endingLineNumber = "137"
-         landmarkName = "-BYGameEngineQuizStarted:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Geo_Quiz/BYQuizViewController.m"
-         timestampString = "368571972.283429"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "148"
-         endingLineNumber = "148"
-         landmarkName = "-BYGameEngineQuizFinished:"
-         landmarkType = "5">
+         startingLineNumber = "163"
+         endingLineNumber = "163"
+         landmarkName = "@implementation BYQuizViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Geo_Quiz/BYGameEngine.m"
-         timestampString = "368567976.329135"
+         timestampString = "368642834.679345"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "60"
-         endingLineNumber = "60"
-         landmarkName = "-quizTimeLeft"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Geo_Quiz/BYGameEngine.m"
-         timestampString = "368567976.329135"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "85"
-         endingLineNumber = "85"
+         startingLineNumber = "115"
+         endingLineNumber = "115"
          landmarkName = "-startNewQuiz"
          landmarkType = "5">
       </FileBreakpoint>
@@ -108,11 +82,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Geo_Quiz/BYGameEngine.m"
-         timestampString = "368567976.329135"
+         timestampString = "368658404.557588"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "117"
-         endingLineNumber = "117"
+         startingLineNumber = "147"
+         endingLineNumber = "147"
          landmarkName = "-processQuizAnswerCoordinate:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -121,11 +95,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Geo_Quiz/BYGameEngine.m"
-         timestampString = "368568000.279958"
+         timestampString = "368658491.772532"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "134"
-         endingLineNumber = "134"
+         startingLineNumber = "167"
+         endingLineNumber = "167"
          landmarkName = "-_pointsForQuiz:WithAnswer:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -134,11 +108,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Geo_Quiz/BYGameEngine.m"
-         timestampString = "368568074.151454"
+         timestampString = "368658491.772532"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "138"
-         endingLineNumber = "138"
+         startingLineNumber = "171"
+         endingLineNumber = "171"
          landmarkName = "-_pointsForQuiz:WithAnswer:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -154,6 +128,110 @@
          endingLineNumber = "41"
          landmarkName = "-reload"
          landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Geo_Quiz/BYGameEngine.m"
+         timestampString = "368627675.516269"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "81"
+         endingLineNumber = "81"
+         landmarkName = "-pauseQuiz"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Geo_Quiz/BYQuizViewController.m"
+         timestampString = "368658032.008672"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "279"
+         endingLineNumber = "279"
+         landmarkName = "-mapView:viewForAnnotation:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Geo_Quiz/BYQuizViewController.m"
+         timestampString = "368658032.008672"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "270"
+         endingLineNumber = "270"
+         landmarkName = "-mapView:viewForAnnotation:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Geo_Quiz/BYQuizViewController.m"
+         timestampString = "368658032.008672"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "268"
+         endingLineNumber = "268"
+         landmarkName = "-mapView:viewForAnnotation:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Geo_Quiz/BYGameEngine.m"
+         timestampString = "368644195.954734"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "113"
+         endingLineNumber = "113"
+         landmarkName = "-startNewQuiz"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Geo_Quiz/BYGameEngine.m"
+         timestampString = "368658404.557588"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "150"
+         endingLineNumber = "150"
+         landmarkName = "-processQuizAnswerCoordinate:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Geo_Quiz/BYQuizViewController.m"
+         timestampString = "368658032.008672"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "207"
+         endingLineNumber = "207"
+         landmarkName = "-BYGameEngineQuizFinished:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Geo_Quiz/ConstantsAndMacros.m"
+         timestampString = "368648024.397691"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "8"
+         endingLineNumber = "8"
+         landmarkName = "CLLocationCoordinateAreEqual()"
+         landmarkType = "7">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

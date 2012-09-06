@@ -43,7 +43,7 @@ const   NSUInteger          CBY_MaxDistance            =   226; /// sqrt( 2 * 16
     _quiz                   = NULL;
     _numberQuiz             = 0;
     _quizStartTimeInterval  = 0;
-    
+    _quizPauseTimeLeft    = 0;
     [_quizFailTimer invalidate];
 }
 
@@ -56,9 +56,19 @@ const   NSUInteger          CBY_MaxDistance            =   226; /// sqrt( 2 * 16
 }
 
 - (NSTimeInterval) quizTimeLeft {
+    if (_state == BYGameQuizState_Paused) {
+        return _quizPauseTimeLeft;
+    }
     
-    return (TimePerQuiz - (
-            [NSDate timeIntervalSinceReferenceDate] - _quizStartTimeInterval)); /// time passed
+    if (_state == BYGameQuizState_Running) {
+        /// ordinary proccess
+        NSTimeInterval timeLeftTillFinish = _quizPauseTimeLeft > 0? _quizPauseTimeLeft : TimePerQuiz;
+        
+        NSTimeInterval timeLeft = (timeLeftTillFinish
+                                   - ([NSDate timeIntervalSinceReferenceDate] - _quizStartTimeInterval)); /// time passed
+        return timeLeft > 0 ? timeLeft : 0;
+    }
+    return 0;
 }
 
 - (BOOL) canStartNewQuiz {
@@ -68,11 +78,29 @@ const   NSUInteger          CBY_MaxDistance            =   226; /// sqrt( 2 * 16
 
 
 - (void) pauseQuiz {
-    
+    if (_state == BYGameQuizState_Running) {
+        _quizPauseTimeLeft = [self quizTimeLeft];
+        [_quizFailTimer invalidate];
+        _state = BYGameQuizState_Paused;
+    } else {
+        BYLOG(@"cant pause game, its not in the running state");
+    }
 }
 
+
+
 - (void) startQuiz {
-    
+    if (_state == BYGameQuizState_Paused) {
+        _quizStartTimeInterval = [NSDate timeIntervalSinceReferenceDate];
+        _quizFailTimer         = [NSTimer scheduledTimerWithTimeInterval:_quizPauseTimeLeft
+                                                                  target:self
+                                                                selector:@selector(quizFailHandler)
+                                                                userInfo:NULL
+                                                                 repeats:NO];
+        _state                 = BYGameQuizState_Running;
+    } else {
+        BYLOG(@"cant continue quiz, its not in paused state");
+    }
 }
 
 
@@ -82,17 +110,21 @@ const   NSUInteger          CBY_MaxDistance            =   226; /// sqrt( 2 * 16
 }
 
 - (void) startNewQuiz {
+    [_quizFailTimer invalidate];
+    
     NSAssert( [self canStartNewQuiz],
              @"Trying to start quiz, start new game first, or check for quiz counter");
     
     _quizStartTimeInterval = [NSDate timeIntervalSinceReferenceDate];
-    _quizFailTimer         = [NSTimer timerWithTimeInterval:TimePerQuiz
-                                                     target:self
+
+    _quizFailTimer         = [NSTimer scheduledTimerWithTimeInterval:TimePerQuiz
+                                                              target:self
                                                    selector:@selector(quizFailHandler)
-                                                   userInfo:NULL
-                                                    repeats:NO];
+                                                            userInfo:NULL
+                                                             repeats:NO];
     _quiz                  = [BYQuiz randomQuizWithDifficulty: [self _currentQuizDifficulty]];
     _pointsGainedForLastQuiz = 0;
+    _quizPauseTimeLeft     = 0;
     
     _numberQuiz ++;
     [delegate BYGameEngineQuizStarted: self];
@@ -114,8 +146,6 @@ const   NSUInteger          CBY_MaxDistance            =   226; /// sqrt( 2 * 16
                                    WithAnswer: coordinate];
     _pointsGained += _pointsForLastQuiz;
     
-    [delegate BYGameEngineQuizFinished: self];
-    
     /// check for if this is last quiz
     if ( _numberQuiz == NumberOfQuizesPerRound * BYQuizDifficulty_Hard) {
         
@@ -123,8 +153,11 @@ const   NSUInteger          CBY_MaxDistance            =   226; /// sqrt( 2 * 16
         
         [delegate BYGameEngineLastQuizFinished: self];
         
-        return ;
+    } else {
+        [delegate BYGameEngineQuizFinished: self];
     }
+    
+    [delegate BYGameEngineProcessQuizAnswerCoordinateAnimation: _quiz.answerCoordinate];
 }
 
 
