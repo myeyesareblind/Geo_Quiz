@@ -14,3 +14,7 @@ NSString * const SigToMain = @"sToMain";
 
 NSString * NBY_ApplicationDidEnterForeGround = @"NBY_ApplicationDidEnterForeGround";
 NSString * NBY_ApplicationDidEnterBackGround = @"NBY_ApplicationDidEnterBackGround";
+
+
+NSString * const UDBY_SoundEnabled = @"UDBY_SoundEnabled";
+NSString * const UDBY_StandartUserDefaultsLoaded = @"UDBY_StandartUserDefaultsLoaded";

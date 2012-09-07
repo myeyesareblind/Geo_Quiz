@@ -20,7 +20,7 @@ typedef enum {
     
     NSString * _quizTask;
     CLLocationCoordinate2D _answerCoordinate;
-    MKMapRect  _mapRect;  /// answerCoordinate shoubl be in, mapView will be locked if setted
+    MKMapRect  _mapRect;                        /// TODO: answerCoordinate shoubl be in, mapView will be locked if setted
     BYQuizDifficulty _difficulty;
 }
 

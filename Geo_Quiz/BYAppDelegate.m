@@ -8,11 +8,18 @@
 
 #import "BYAppDelegate.h"
 
+@interface BYAppDelegate()
+
+- (void) loadStandartUserDefaults;
+
+@end
+
 @implementation BYAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [self loadStandartUserDefaults];
     return YES;
 }
 							
@@ -47,4 +54,14 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (void) loadStandartUserDefaults {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    BOOL standartsLoaded = [ud boolForKey:UDBY_StandartUserDefaultsLoaded];
+    if (! standartsLoaded) {
+        [ud setBool:YES
+             forKey:UDBY_SoundEnabled];
+        [ud setBool:YES
+             forKey:UDBY_StandartUserDefaultsLoaded];
+    }
+}
 @end

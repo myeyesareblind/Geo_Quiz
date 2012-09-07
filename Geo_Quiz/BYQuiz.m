@@ -28,7 +28,7 @@
         _difficulty         = difficulty;
         _answerCoordinate   = ansCoord;
         _task               = [task copy];
-        if (! MKMapRectIsEmpty(zoneRect)) {
+        if (! MKMapRectIsNull(zoneRect)) {
             _mapRect = zoneRect;
         }
     }
@@ -71,5 +71,4 @@
     }
     return NULL;
 }
-
 @end

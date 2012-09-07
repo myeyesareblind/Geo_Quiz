@@ -9,6 +9,11 @@ extern BOOL       CLLocationCoordinateAreEqual(CLLocationCoordinate2D lhs, CLLoc
 extern NSString * NSStringFromCLLocationCoordinate2d(CLLocationCoordinate2D coord);
 extern NSString * const SigToMain;
 
+
 /// notifications:
 extern NSString * NBY_ApplicationDidEnterForeGround;
 extern NSString * NBY_ApplicationDidEnterBackGround;
+
+/// NSUderDefaultsSettings
+extern NSString * const UDBY_SoundEnabled;
+extern NSString * const UDBY_StandartUserDefaultsLoaded;

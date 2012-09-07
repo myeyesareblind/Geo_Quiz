@@ -11,6 +11,7 @@
 #import "BYGameEngine.h"
 #import "BYAlertView.h"
 #import "BYAnnotation.h"
+#import "BYSoundManager.h"
 
 const float CBY_viewUpdateTimerInterval     = 0.2f;
 const int   CBY_annotationExlamationMark    = 5655;
@@ -297,9 +298,12 @@ const int   CBY_annotationQuestionMark      = 5412;
 
 
 - (void) _addExlamationMarkAnnotationAtPoint:(CLLocationCoordinate2D)pnt {
+    
     [_mapView addAnnotation: [[BYAnnotation alloc] initWithCoordinate:pnt
                                                                   Tag:CBY_annotationExlamationMark]];
     [_mapView setNeedsDisplay];
+    
+    [[BYSoundManager soundManager] playSoundEffect: SBY_ExclamationMarkPlacedSound];
 }
 
 
@@ -307,6 +311,8 @@ const int   CBY_annotationQuestionMark      = 5412;
     [_mapView addAnnotation: [[BYAnnotation alloc] initWithCoordinate:pnt
                                                                   Tag:CBY_annotationQuestionMark]];
     [_mapView setNeedsDisplay];
+    
+    [[BYSoundManager soundManager] playSoundEffect: SBY_QuestionMarPlacedkSound];
 }
 
 
