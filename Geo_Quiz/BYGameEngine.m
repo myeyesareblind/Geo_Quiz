@@ -8,11 +8,11 @@
 
 #import "BYGameEngine.h"
 #import "BYQuiz.h"
+#import "BYSQLQuizDataWrapper.h"
 
-const   NSUInteger          NumberOfQuizesPerRound     =   2;
 const   NSUInteger          QuizDifficultyMultiplier   =   500;
 const   NSTimeInterval      TimePerQuiz                =   30.0; /// seconds
-const   NSUInteger          CBY_MaxDistance            =   226; /// sqrt( 2 * 160 * 160);
+const   NSUInteger          CBY_MaxDistance            =   226;  /// sqrt( 2 * 160 * 160);
 
 @interface BYGameEngine ()
 
@@ -33,6 +33,7 @@ const   NSUInteger          CBY_MaxDistance            =   226; /// sqrt( 2 * 16
     self = [super init];
     if (self) {
         [self reload];
+        _quizDataWrapper = [[BYSQLQuizDataWrapper alloc] init];
     }
     return self;
 }
@@ -73,7 +74,7 @@ const   NSUInteger          CBY_MaxDistance            =   226; /// sqrt( 2 * 16
 
 - (BOOL) canStartNewQuiz {
     return (_state == BYGameQuizState_Running
-            && _numberQuiz < (NumberOfQuizesPerRound * BYQuizDifficulty_Hard));
+            && _numberQuiz < (CBY_NumberOfQuizesPerRound * BYQuizDifficulty_Hard));
 }
 
 
@@ -106,8 +107,10 @@ const   NSUInteger          CBY_MaxDistance            =   226; /// sqrt( 2 * 16
 
 - (void) startNewGame {
     [self reload];
+    [_quizDataWrapper loadQuizData];
     _state                 = BYGameQuizState_Running;
 }
+
 
 - (void) startNewQuiz {
     [_quizFailTimer invalidate];
@@ -122,7 +125,7 @@ const   NSUInteger          CBY_MaxDistance            =   226; /// sqrt( 2 * 16
                                                    selector:@selector(quizFailHandler)
                                                             userInfo:NULL
                                                              repeats:NO];
-    _quiz                  = [BYQuiz randomQuizWithDifficulty: [self _currentQuizDifficulty]];
+    _quiz                  = [_quizDataWrapper randomQuizWithDifficulty: [self _currentQuizDifficulty]];
     _pointsGainedForLastQuiz = 0;
     _quizPauseTimeLeft     = 0;
     
@@ -147,7 +150,7 @@ const   NSUInteger          CBY_MaxDistance            =   226; /// sqrt( 2 * 16
     _pointsGained += _pointsForLastQuiz;
     
     /// check for if this is last quiz
-    if ( _numberQuiz == NumberOfQuizesPerRound * BYQuizDifficulty_Hard) {
+    if ( _numberQuiz == CBY_NumberOfQuizesPerRound * BYQuizDifficulty_Hard) {
         
         _state  = BYGameQuizState_Finished;
         
@@ -174,7 +177,7 @@ const   NSUInteger          CBY_MaxDistance            =   226; /// sqrt( 2 * 16
 
 
 - (BYQuizDifficulty) _currentQuizDifficulty {
-    return 1 + ( _numberQuiz / NumberOfQuizesPerRound);
+    return 1 + ( _numberQuiz / CBY_NumberOfQuizesPerRound);
 }
 
 

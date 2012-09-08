@@ -5,6 +5,9 @@
 #   define BYLOG(...)
 #endif
 
+
+extern int const CBY_NumberOfQuizesPerRound;
+
 extern BOOL       CLLocationCoordinateAreEqual(CLLocationCoordinate2D lhs, CLLocationCoordinate2D rhs);
 extern NSString * NSStringFromCLLocationCoordinate2d(CLLocationCoordinate2D coord);
 extern NSString * const SigToMain;

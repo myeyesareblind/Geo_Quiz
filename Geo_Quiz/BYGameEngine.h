@@ -10,6 +10,7 @@
 #import <MapKit/MKGeometry.h>
 
 @class      BYQuiz;
+@class      BYSQLQuizDataWrapper;
 @protocol   BYGameEngineProtocol;
 
 typedef enum  {
@@ -21,6 +22,7 @@ typedef enum  {
 } BYGameQuizState;
 
 @interface BYGameEngine : NSObject {
+    BYSQLQuizDataWrapper*  _quizDataWrapper;
     
     NSTimeInterval      _quizStartTimeInterval;
     NSTimeInterval      _quizPauseTimeLeft;

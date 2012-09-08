@@ -22,7 +22,6 @@
     NSAssert(( ansCoord.latitude != 0 || ansCoord.longitude != 0 ),
              @"BYQuiz # initWith - attemp to init with incorrect answer coordinate");
     NSAssert(difficulty != BYQuizDifficulty_Undefined, @"BYQuiz # initWith - attemp to init with incorrect difficulty");
-    
     self = [super init];
     if (self) {
         _difficulty         = difficulty;

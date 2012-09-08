@@ -18,3 +18,5 @@ NSString * NBY_ApplicationDidEnterBackGround = @"NBY_ApplicationDidEnterBackGrou
 
 NSString * const UDBY_SoundEnabled = @"UDBY_SoundEnabled";
 NSString * const UDBY_StandartUserDefaultsLoaded = @"UDBY_StandartUserDefaultsLoaded";
+
+int const CBY_NumberOfQuizesPerRound = 3;
