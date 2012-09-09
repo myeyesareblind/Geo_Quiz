@@ -9,6 +9,7 @@
 #import "BYGameEngine.h"
 #import "BYQuiz.h"
 #import "BYSQLQuizDataWrapper.h"
+#import "BYSQLLeaderBoardWrapper.h"
 
 const   NSUInteger          QuizDifficultyMultiplier   =   500;
 const   NSTimeInterval      TimePerQuiz                =   30.0; /// seconds
@@ -135,7 +136,7 @@ const   NSUInteger          CBY_MaxDistance            =   226;  /// sqrt( 2 * 1
 
 
 - (void) quizFailHandler {
-    [delegate BYGameEngineTimeRanOut: self];
+    [self processQuizAnswerCoordinate: CLLocationCoordinate2DInfinity() ];
 }
 
 
@@ -154,9 +155,15 @@ const   NSUInteger          CBY_MaxDistance            =   226;  /// sqrt( 2 * 1
         
         _state  = BYGameQuizState_Finished;
         
+        [[BYSQLLeaderBoardWrapper sharedDataBaseWrapper] pushRecord:
+         [[BYLeaderBoardDataBaseRecord alloc] initWithName:[[NSUserDefaults standardUserDefaults] objectForKey:UDBY_UserName]
+                                                    points:[self totalPoints]
+                                                      date:[NSDate date]]];
+
         [delegate BYGameEngineLastQuizFinished: self];
         
     } else {
+        
         [delegate BYGameEngineQuizFinished: self];
     }
     
@@ -166,12 +173,20 @@ const   NSUInteger          CBY_MaxDistance            =   226;  /// sqrt( 2 * 1
 
 
 - (NSUInteger)  _pointsForQuiz: (BYQuiz *) quiz WithAnswer: (CLLocationCoordinate2D) answCoord {
-    /// get distance etc
-    double distance = sqrt( pow(abs(quiz.answerCoordinate.latitude - answCoord.latitude),2)
-                           +  pow(abs(quiz.answerCoordinate.longitude - answCoord.longitude),2));
-    float distancePercent = 1 - distance / CBY_MaxDistance;
-    
-    return  distancePercent * quiz.difficulty * QuizDifficultyMultiplier;
+#warning TODO: pts < 0 fix!
+    if (CLLocationCoordinate2DIsValid(answCoord)) {     /// on timer finished loading infinity coordinate
+        /// get distance %
+        double distance = sqrt( pow(abs(quiz.answerCoordinate.latitude - answCoord.latitude),2)
+                               +  pow(abs(quiz.answerCoordinate.longitude - answCoord.longitude),2));
+        float distancePercent = 1 - distance / CBY_MaxDistance;
+        
+        /// get time %
+        double timePercent = [self quizTimeLeft] / TimePerQuiz;
+        
+        return  timePercent * distancePercent * quiz.difficulty * QuizDifficultyMultiplier;
+    } else {
+        return 0;
+    }
 }
 
 

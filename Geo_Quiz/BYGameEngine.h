@@ -22,7 +22,7 @@ typedef enum  {
 } BYGameQuizState;
 
 @interface BYGameEngine : NSObject {
-    BYSQLQuizDataWrapper*  _quizDataWrapper;
+    BYSQLQuizDataWrapper*       _quizDataWrapper;
     
     NSTimeInterval      _quizStartTimeInterval;
     NSTimeInterval      _quizPauseTimeLeft;

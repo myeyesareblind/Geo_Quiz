@@ -9,6 +9,8 @@
 extern int const CBY_NumberOfQuizesPerRound;
 
 extern BOOL       CLLocationCoordinateAreEqual(CLLocationCoordinate2D lhs, CLLocationCoordinate2D rhs);
+extern CLLocationCoordinate2D CLLocationCoordinate2DInfinity();
+
 extern NSString * NSStringFromCLLocationCoordinate2d(CLLocationCoordinate2D coord);
 extern NSString * const SigToMain;
 
@@ -20,3 +22,5 @@ extern NSString * NBY_ApplicationDidEnterBackGround;
 /// NSUderDefaultsSettings
 extern NSString * const UDBY_SoundEnabled;
 extern NSString * const UDBY_StandartUserDefaultsLoaded;
+extern NSString * const UDBY_UserName;
+extern NSString * const UDBY_DefaultUserName;

@@ -47,6 +47,7 @@ NSString * const kRowDifficulty = @"Difficulty";
         [paramDictionary setObject:[NSNumber numberWithInt:dif] forKey:Difficulty];
         FMResultSet *resultSet = [_fmDataBase executeQuery:
                                   @"SELECT * FROM Quiz where Difficulty == :Difficulty ORDER BY random() LIMIT :kSizeLimit" withParameterDictionary:paramDictionary];
+                
         while ([resultSet next]) {
             BYQuiz *quiz = [[BYQuiz alloc] initWithDescription:[resultSet stringForColumn:kRowTask]
                                               AnswerCoordinate:CLLocationCoordinate2DMake([resultSet doubleForColumn:kRowCoor_Latitute], [resultSet doubleForColumn:kRowCoor_Longtitude])

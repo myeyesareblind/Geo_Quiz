@@ -62,6 +62,8 @@
              forKey:UDBY_SoundEnabled];
         [ud setBool:YES
              forKey:UDBY_StandartUserDefaultsLoaded];
+        [ud setValue:UDBY_DefaultUserName
+              forKey:UDBY_UserName];
     }
 }
 @end
