@@ -50,7 +50,7 @@ static BYSQLLeaderBoardWrapper* sharedInstance = nil;
 - (id) _init {
     self = [super init];
     if (self) {
-        _db     = [[FMDatabase alloc] initWithPath: [NSHomeDirectory() stringByAppendingPathComponent:dbName] ];
+        _db     = [[FMDatabase alloc] initWithPath: [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:dbName]];
         
         BOOL dbOpened = [_db open];
         NSAssert(dbOpened, [_db lastErrorMessage]);

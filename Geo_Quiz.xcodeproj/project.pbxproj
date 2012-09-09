@@ -33,7 +33,26 @@
 		25503AE215F6998E002EA931 /* BYGameEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 25503AE015F6998E002EA931 /* BYGameEngine.m */; };
 		2586D37115FA3E570073C8B7 /* BYSoundManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A2010C15FA3AFB006F17F8 /* BYSoundManager.m */; };
 		2586D37315FA3E6E0073C8B7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2586D37215FA3E6E0073C8B7 /* AudioToolbox.framework */; };
+		259CE25C15FBC83C0085A5E4 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 259CE25315FBC83C0085A5E4 /* FMDatabase.m */; };
+		259CE25D15FBC83C0085A5E4 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 259CE25515FBC83C0085A5E4 /* FMDatabaseAdditions.m */; };
+		259CE25E15FBC83C0085A5E4 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 259CE25715FBC83C0085A5E4 /* FMDatabasePool.m */; };
+		259CE25F15FBC83C0085A5E4 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 259CE25915FBC83C0085A5E4 /* FMDatabaseQueue.m */; };
+		259CE26015FBC83C0085A5E4 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 259CE25B15FBC83C0085A5E4 /* FMResultSet.m */; };
+		259CE26115FBC85C0085A5E4 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 259CE25315FBC83C0085A5E4 /* FMDatabase.m */; };
+		259CE26215FBC85C0085A5E4 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 259CE25515FBC83C0085A5E4 /* FMDatabaseAdditions.m */; };
+		259CE26315FBC85C0085A5E4 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 259CE25715FBC83C0085A5E4 /* FMDatabasePool.m */; };
+		259CE26415FBC85C0085A5E4 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 259CE25915FBC83C0085A5E4 /* FMDatabaseQueue.m */; };
+		259CE26515FBC85C0085A5E4 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 259CE25B15FBC83C0085A5E4 /* FMResultSet.m */; };
 		25A2010D15FA3AFB006F17F8 /* BYSoundManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A2010C15FA3AFB006F17F8 /* BYSoundManager.m */; };
+		25A3CE2E15FB59EE00955AA4 /* BYSQLQuizDataWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A3CE2D15FB59EE00955AA4 /* BYSQLQuizDataWrapper.m */; };
+		25A3CE3415FB5A7200955AA4 /* Quiz.db in Resources */ = {isa = PBXBuildFile; fileRef = 25A3CE3315FB5A7200955AA4 /* Quiz.db */; };
+		25A3CE3E15FB5AF400955AA4 /* Quiz.db in Resources */ = {isa = PBXBuildFile; fileRef = 25A3CE3315FB5A7200955AA4 /* Quiz.db */; };
+		25A3CE4415FB64A100955AA4 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 25A3CE4315FB64A100955AA4 /* libsqlite3.dylib */; };
+		25A5766C15FCAD010081024A /* BYLeaderBoardTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A5766B15FCAD010081024A /* BYLeaderBoardTableViewController.m */; };
+		25A5767015FCAD150081024A /* BYSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A5766F15FCAD150081024A /* BYSettingsViewController.m */; };
+		25A5767315FCAE760081024A /* BYLeaderBoardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A5767215FCAE760081024A /* BYLeaderBoardTableViewCell.m */; };
+		25A5767615FCBA470081024A /* BYSQLLeaderBoardWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A5767515FCBA470081024A /* BYSQLLeaderBoardWrapper.m */; };
+		25A5767815FCD0080081024A /* BYLeaderBoardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25A5767715FCD0080081024A /* BYLeaderBoardTableViewCell.xib */; };
 		25A9D04715F9004A00FB78C2 /* ?.png in Resources */ = {isa = PBXBuildFile; fileRef = 25A9D04515F9004A00FB78C2 /* ?.png */; };
 		25A9D04A15F9016900FB78C2 /* !.png in Resources */ = {isa = PBXBuildFile; fileRef = 25A9D04915F9016900FB78C2 /* !.png */; };
 		25A9D05015F9054200FB78C2 /* BYAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A9D04F15F9054200FB78C2 /* BYAnnotation.m */; };
@@ -84,8 +103,31 @@
 		25503ADF15F6998E002EA931 /* BYGameEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYGameEngine.h; sourceTree = "<group>"; };
 		25503AE015F6998E002EA931 /* BYGameEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYGameEngine.m; sourceTree = "<group>"; };
 		2586D37215FA3E6E0073C8B7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		259CE25215FBC83C0085A5E4 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabase.h; path = Geo_Quiz/libs/FMDB/FMDatabase.h; sourceTree = "<group>"; };
+		259CE25315FBC83C0085A5E4 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabase.m; path = Geo_Quiz/libs/FMDB/FMDatabase.m; sourceTree = "<group>"; };
+		259CE25415FBC83C0085A5E4 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabaseAdditions.h; path = Geo_Quiz/libs/FMDB/FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		259CE25515FBC83C0085A5E4 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseAdditions.m; path = Geo_Quiz/libs/FMDB/FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		259CE25615FBC83C0085A5E4 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabasePool.h; path = Geo_Quiz/libs/FMDB/FMDatabasePool.h; sourceTree = "<group>"; };
+		259CE25715FBC83C0085A5E4 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabasePool.m; path = Geo_Quiz/libs/FMDB/FMDatabasePool.m; sourceTree = "<group>"; };
+		259CE25815FBC83C0085A5E4 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabaseQueue.h; path = Geo_Quiz/libs/FMDB/FMDatabaseQueue.h; sourceTree = "<group>"; };
+		259CE25915FBC83C0085A5E4 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseQueue.m; path = Geo_Quiz/libs/FMDB/FMDatabaseQueue.m; sourceTree = "<group>"; };
+		259CE25A15FBC83C0085A5E4 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMResultSet.h; path = Geo_Quiz/libs/FMDB/FMResultSet.h; sourceTree = "<group>"; };
+		259CE25B15FBC83C0085A5E4 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMResultSet.m; path = Geo_Quiz/libs/FMDB/FMResultSet.m; sourceTree = "<group>"; };
 		25A2010B15FA3AFB006F17F8 /* BYSoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BYSoundManager.h; path = ../../CubeBrowser/Shared/BYSoundManager.h; sourceTree = "<group>"; };
 		25A2010C15FA3AFB006F17F8 /* BYSoundManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BYSoundManager.m; path = ../../CubeBrowser/Shared/BYSoundManager.m; sourceTree = "<group>"; };
+		25A3CE2C15FB59EE00955AA4 /* BYSQLQuizDataWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYSQLQuizDataWrapper.h; sourceTree = "<group>"; };
+		25A3CE2D15FB59EE00955AA4 /* BYSQLQuizDataWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYSQLQuizDataWrapper.m; sourceTree = "<group>"; };
+		25A3CE3315FB5A7200955AA4 /* Quiz.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = Quiz.db; path = Geo_Quiz/Resources/Quiz.db; sourceTree = "<group>"; };
+		25A3CE4315FB64A100955AA4 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		25A5766A15FCAD010081024A /* BYLeaderBoardTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYLeaderBoardTableViewController.h; sourceTree = "<group>"; };
+		25A5766B15FCAD010081024A /* BYLeaderBoardTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYLeaderBoardTableViewController.m; sourceTree = "<group>"; };
+		25A5766E15FCAD150081024A /* BYSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYSettingsViewController.h; sourceTree = "<group>"; };
+		25A5766F15FCAD150081024A /* BYSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYSettingsViewController.m; sourceTree = "<group>"; };
+		25A5767115FCAE760081024A /* BYLeaderBoardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYLeaderBoardTableViewCell.h; sourceTree = "<group>"; };
+		25A5767215FCAE760081024A /* BYLeaderBoardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYLeaderBoardTableViewCell.m; sourceTree = "<group>"; };
+		25A5767415FCBA470081024A /* BYSQLLeaderBoardWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYSQLLeaderBoardWrapper.h; sourceTree = "<group>"; };
+		25A5767515FCBA470081024A /* BYSQLLeaderBoardWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYSQLLeaderBoardWrapper.m; sourceTree = "<group>"; };
+		25A5767715FCD0080081024A /* BYLeaderBoardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BYLeaderBoardTableViewCell.xib; sourceTree = "<group>"; };
 		25A9D04515F9004A00FB78C2 /* ?.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "?.png"; path = "Geo_Quiz/Resources/?.png"; sourceTree = "<group>"; };
 		25A9D04915F9016900FB78C2 /* !.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "!.png"; path = "Geo_Quiz/Resources/!.png"; sourceTree = "<group>"; };
 		25A9D04E15F9054200FB78C2 /* BYAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYAnnotation.h; sourceTree = "<group>"; };
@@ -103,6 +145,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25A3CE4415FB64A100955AA4 /* libsqlite3.dylib in Frameworks */,
 				2586D37315FA3E6E0073C8B7 /* AudioToolbox.framework in Frameworks */,
 				25AADFEA15F76AD1008746CE /* CoreLocation.framework in Frameworks */,
 				25503ADA15F68EFC002EA931 /* MapKit.framework in Frameworks */,
@@ -128,6 +171,7 @@
 		25503A7B15F67437002EA931 = {
 			isa = PBXGroup;
 			children = (
+				25A3CE3715FB5AA600955AA4 /* Libs */,
 				2586D37215FA3E6E0073C8B7 /* AudioToolbox.framework */,
 				25A9D04315F8FFF600FB78C2 /* Resources */,
 				25503A9015F67437002EA931 /* Geo_Quiz */,
@@ -149,6 +193,7 @@
 		25503A8915F67437002EA931 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				25A3CE4315FB64A100955AA4 /* libsqlite3.dylib */,
 				25AADFE915F76AD1008746CE /* CoreLocation.framework */,
 				25503AD915F68EFC002EA931 /* MapKit.framework */,
 				25503A8A15F67437002EA931 /* UIKit.framework */,
@@ -217,6 +262,8 @@
 				25503AC615F674E9002EA931 /* BYQuizViewController.m */,
 				25A9D04E15F9054200FB78C2 /* BYAnnotation.h */,
 				25A9D04F15F9054200FB78C2 /* BYAnnotation.m */,
+				25A3CE2C15FB59EE00955AA4 /* BYSQLQuizDataWrapper.h */,
+				25A3CE2D15FB59EE00955AA4 /* BYSQLQuizDataWrapper.m */,
 			);
 			name = Game_Quiz;
 			sourceTree = "<group>";
@@ -224,6 +271,13 @@
 		25503AC315F67476002EA931 /* Leader_Board */ = {
 			isa = PBXGroup;
 			children = (
+				25A5766A15FCAD010081024A /* BYLeaderBoardTableViewController.h */,
+				25A5766B15FCAD010081024A /* BYLeaderBoardTableViewController.m */,
+				25A5767115FCAE760081024A /* BYLeaderBoardTableViewCell.h */,
+				25A5767215FCAE760081024A /* BYLeaderBoardTableViewCell.m */,
+				25A5767415FCBA470081024A /* BYSQLLeaderBoardWrapper.h */,
+				25A5767515FCBA470081024A /* BYSQLLeaderBoardWrapper.m */,
+				25A5767715FCD0080081024A /* BYLeaderBoardTableViewCell.xib */,
 			);
 			name = Leader_Board;
 			sourceTree = "<group>";
@@ -231,6 +285,8 @@
 		25503AC415F67493002EA931 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				25A5766E15FCAD150081024A /* BYSettingsViewController.h */,
+				25A5766F15FCAD150081024A /* BYSettingsViewController.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -248,9 +304,35 @@
 			name = Root_View;
 			sourceTree = "<group>";
 		};
+		25A3CE3715FB5AA600955AA4 /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				25A3CE3815FB5AB400955AA4 /* FMDB */,
+			);
+			name = Libs;
+			sourceTree = "<group>";
+		};
+		25A3CE3815FB5AB400955AA4 /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				259CE25215FBC83C0085A5E4 /* FMDatabase.h */,
+				259CE25315FBC83C0085A5E4 /* FMDatabase.m */,
+				259CE25415FBC83C0085A5E4 /* FMDatabaseAdditions.h */,
+				259CE25515FBC83C0085A5E4 /* FMDatabaseAdditions.m */,
+				259CE25615FBC83C0085A5E4 /* FMDatabasePool.h */,
+				259CE25715FBC83C0085A5E4 /* FMDatabasePool.m */,
+				259CE25815FBC83C0085A5E4 /* FMDatabaseQueue.h */,
+				259CE25915FBC83C0085A5E4 /* FMDatabaseQueue.m */,
+				259CE25A15FBC83C0085A5E4 /* FMResultSet.h */,
+				259CE25B15FBC83C0085A5E4 /* FMResultSet.m */,
+			);
+			name = FMDB;
+			sourceTree = "<group>";
+		};
 		25A9D04315F8FFF600FB78C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				25A3CE3315FB5A7200955AA4 /* Quiz.db */,
 				25A9D05115F9525E00FB78C2 /* kick.wav */,
 				25A9D04515F9004A00FB78C2 /* ?.png */,
 				25A9D04915F9016900FB78C2 /* !.png */,
@@ -279,6 +361,7 @@
 				25503A8215F67437002EA931 /* Sources */,
 				25503A8315F67437002EA931 /* Frameworks */,
 				25503A8415F67437002EA931 /* Resources */,
+				50524F424C454D533F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -341,12 +424,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25A3CE3E15FB5AF400955AA4 /* Quiz.db in Resources */,
 				25503A9515F67437002EA931 /* InfoPlist.strings in Resources */,
 				25503A9E15F67437002EA931 /* MainStoryboard_iPhone.storyboard in Resources */,
 				25503AA115F67437002EA931 /* MainStoryboard_iPad.storyboard in Resources */,
 				25A9D04715F9004A00FB78C2 /* ?.png in Resources */,
 				25A9D04A15F9016900FB78C2 /* !.png in Resources */,
 				25A9D05215F9525E00FB78C2 /* kick.wav in Resources */,
+				25A5767815FCD0080081024A /* BYLeaderBoardTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +440,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				25503AB615F67437002EA931 /* InfoPlist.strings in Resources */,
+				25A3CE3415FB5A7200955AA4 /* Quiz.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,6 +460,19 @@
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
 		};
+		50524F424C454D533F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export CODESIGN_ALLOCATE=/Library/JailCoder/codesign_allocate\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ]; then\n/Library/JailCoder/Entitlements/Entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -381,6 +480,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				259CE26115FBC85C0085A5E4 /* FMDatabase.m in Sources */,
+				259CE26215FBC85C0085A5E4 /* FMDatabaseAdditions.m in Sources */,
+				259CE26315FBC85C0085A5E4 /* FMDatabasePool.m in Sources */,
+				259CE26415FBC85C0085A5E4 /* FMDatabaseQueue.m in Sources */,
+				259CE26515FBC85C0085A5E4 /* FMResultSet.m in Sources */,
 				2586D37115FA3E570073C8B7 /* BYSoundManager.m in Sources */,
 				25503A9715F67437002EA931 /* main.m in Sources */,
 				25503A9B15F67437002EA931 /* BYAppDelegate.m in Sources */,
@@ -392,6 +496,11 @@
 				25AADFE015F75077008746CE /* ConstantsAndMacros.m in Sources */,
 				25AADFE815F768B1008746CE /* BYAlertView.m in Sources */,
 				25A9D05015F9054200FB78C2 /* BYAnnotation.m in Sources */,
+				25A3CE2E15FB59EE00955AA4 /* BYSQLQuizDataWrapper.m in Sources */,
+				25A5766C15FCAD010081024A /* BYLeaderBoardTableViewController.m in Sources */,
+				25A5767015FCAD150081024A /* BYSettingsViewController.m in Sources */,
+				25A5767315FCAE760081024A /* BYLeaderBoardTableViewCell.m in Sources */,
+				25A5767615FCBA470081024A /* BYSQLLeaderBoardWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +515,11 @@
 				25503ADE15F692EC002EA931 /* BYQuiz.m in Sources */,
 				25503AE215F6998E002EA931 /* BYGameEngine.m in Sources */,
 				25A2010D15FA3AFB006F17F8 /* BYSoundManager.m in Sources */,
+				259CE25C15FBC83C0085A5E4 /* FMDatabase.m in Sources */,
+				259CE25D15FBC83C0085A5E4 /* FMDatabaseAdditions.m in Sources */,
+				259CE25E15FBC83C0085A5E4 /* FMDatabasePool.m in Sources */,
+				259CE25F15FBC83C0085A5E4 /* FMDatabaseQueue.m in Sources */,
+				259CE26015FBC83C0085A5E4 /* FMResultSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,7 +577,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -491,7 +605,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -509,11 +623,21 @@
 		25503ABD15F67437002EA931 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Geo_Quiz/Geo_Quiz-Prefix.pch";
 				INFOPLIST_FILE = "Geo_Quiz/Geo_Quiz-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Geo_Quiz/libs\"",
+				);
 				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/** $(BUILT_PRODUCTS_DIR)/Libs/FMDB/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -521,10 +645,20 @@
 		25503ABE15F67437002EA931 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Geo_Quiz/Geo_Quiz-Prefix.pch";
 				INFOPLIST_FILE = "Geo_Quiz/Geo_Quiz-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Geo_Quiz/libs\"",
+				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -540,6 +674,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Geo_Quiz/Geo_Quiz-Prefix.pch";
 				INFOPLIST_FILE = "Geo_QuizTests/Geo_QuizTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Geo_Quiz/libs\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
@@ -557,6 +695,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Geo_Quiz/Geo_Quiz-Prefix.pch";
 				INFOPLIST_FILE = "Geo_QuizTests/Geo_QuizTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Geo_Quiz/libs\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;

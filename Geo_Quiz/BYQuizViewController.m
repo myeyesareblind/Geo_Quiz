@@ -53,11 +53,11 @@ const int   CBY_annotationQuestionMark      = 5412;
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(applicationDidEnterBackGround)
                                                      name:NBY_ApplicationDidEnterBackGround
-                                                   object:[[UIApplication sharedApplication] delegate]];
+                                                   object:NULL];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(applicationDidEnterForeGround)
                                                      name:NBY_ApplicationDidEnterForeGround
-                                                   object:[[UIApplication sharedApplication] delegate]];
+                                                   object:NULL];
     }
     return self;
 }
@@ -69,6 +69,15 @@ const int   CBY_annotationQuestionMark      = 5412;
         // Custom initialization
         _gameEngine = [[BYGameEngine alloc] init];
         _gameEngine.delegate = self;
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(applicationDidEnterBackGround)
+                                                     name:NBY_ApplicationDidEnterBackGround
+                                                   object:[[UIApplication sharedApplication] delegate]];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(applicationDidEnterForeGround)
+                                                     name:NBY_ApplicationDidEnterForeGround
+                                                   object:[[UIApplication sharedApplication] delegate]];
+
     }
     return self;
 }
