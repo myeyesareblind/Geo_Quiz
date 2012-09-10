@@ -205,8 +205,9 @@ const int   CBY_annotationQuestionMark      = 5412;
     
     /// wait for scroll animation of mapview to finish
 
+    __weak BYGameEngine *gn = _gameEngine;
     
-    _onQuizFinishedSelector = [ ^{
+    _onQuizFinishedSelector = ^{
     NSString *pointsInformation = [NSString stringWithFormat: NSLocalizedString(@"kPoint gained %d", NULL), _gameEngine.pointsForLastQuiz ];
     
     /// show alertView with points gained and next button
@@ -214,23 +215,25 @@ const int   CBY_annotationQuestionMark      = 5412;
     BYAlertView* alertView = [[BYAlertView alloc] initWithTitle:NSLocalizedString(@"kQuizFinished_alertViewTitle", NULL)
                                                         message:pointsInformation
                                                      completion:^(BOOL cancel, NSInteger buttonIndex){
-                                                         if ([_gameEngine canStartNewQuiz])  /// this quiz might be last one
-                                                             [_gameEngine startNewQuiz];
+                                                         if ([gn canStartNewQuiz])  /// this quiz might be last one
+                                                             [gn startNewQuiz];
                                                      }
                                               cancelButtonTitle:NSLocalizedString(@"kOK", NULL)
                                               otherButtonTitles:nil];
     [alertView show];
-    } copy];
+    };
 }
 
 
 - (void) BYGameEngineLastQuizFinished:(BYGameEngine *)engine {
     [self _updateViews];
     
+    __weak BYGameEngine *gn = _gameEngine;
+    __weak BYQuizViewController *weakSelf = self;
     /// wait for scroll animation of mapview to finish
-    _onQuizFinishedSelector = [^{
+    _onQuizFinishedSelector = ^{
     NSString *pointsInformation = [NSString stringWithFormat: NSLocalizedString(@"kPoint gained %d", NULL), _gameEngine.pointsForLastQuiz ];
-    
+            
     /// show alertView with points gained and next button
     /// if this quiz was last one, then show finish dialogue
     BYAlertView* alertView = [[BYAlertView alloc] initWithTitle:NSLocalizedString(@"kQuizFinished_alertViewTitle", NULL)
@@ -243,10 +246,10 @@ const int   CBY_annotationQuestionMark      = 5412;
                                                                                                                         message:pointsInformation
                                                                                                                      completion:^(BOOL cancel, NSInteger buttonIndex){
                                                                                                                          if (cancel) {
-                                                                                                                             [self quitButtonHandler: NULL];
+                                                                                                                             [weakSelf quitButtonHandler: NULL];
                                                                                                                          } else {
-                                                                                                                             [_gameEngine startNewGame];
-                                                                                                                             [_gameEngine startNewQuiz];
+                                                                                                                             [gn startNewGame];
+                                                                                                                             [gn startNewQuiz];
                                                                                                                          }
                                                                                                                      }
                                                                                                               cancelButtonTitle:NSLocalizedString(@"kQuit", NULL)
@@ -256,8 +259,9 @@ const int   CBY_annotationQuestionMark      = 5412;
                                               cancelButtonTitle:NSLocalizedString(@"kOK", NULL)
                                               otherButtonTitles:nil];
         [alertView show];
-    } copy]; /// block
+    }; /// block
 }
+
 
 - (void) BYGameEngineProcessQuizAnswerCoordinateAnimation:(CLLocationCoordinate2D)quizAnswerCoord {
     [self _addExlamationMarkAnnotationAtPoint: quizAnswerCoord];
@@ -295,8 +299,10 @@ const int   CBY_annotationQuestionMark      = 5412;
 
 - (void) mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
     if (animated) {
-        _onQuizFinishedSelector();
-        _onQuizFinishedSelector = NULL;
+        if (_onQuizFinishedSelector) {
+            _onQuizFinishedSelector();
+            _onQuizFinishedSelector = NULL;
+        }
     }
 }
 
