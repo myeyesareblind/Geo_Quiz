@@ -39,14 +39,14 @@ const   NSUInteger          CBY_MaxDistance            =   226;  /// sqrt( 2 * 1
     return self;
 }
 
+
 - (void) reload {
     _state                  = BYGameQuizState_NotStarted;
     _pointsGained           = 0;
     _quiz                   = NULL;
     _numberQuiz             = 0;
     _quizStartTimeInterval  = 0;
-    _quizPauseTimeLeft    = 0;
-    [_quizFailTimer invalidate];
+    _quizPauseTimeLeft      = 0;
 }
 
 - (BYGameQuizState) gameQuizState {
@@ -82,7 +82,10 @@ const   NSUInteger          CBY_MaxDistance            =   226;  /// sqrt( 2 * 1
 - (void) pauseQuiz {
     if (_state == BYGameQuizState_Running) {
         _quizPauseTimeLeft = [self quizTimeLeft];
-        [_quizFailTimer invalidate];
+        
+        [NSObject cancelPreviousPerformRequestsWithTarget:self
+                                                 selector:@selector(quizFailHandler)
+                                                   object:NULL];
         _state = BYGameQuizState_Paused;
     } else {
         BYLOG(@"cant pause game, its not in the running state");
@@ -94,11 +97,10 @@ const   NSUInteger          CBY_MaxDistance            =   226;  /// sqrt( 2 * 1
 - (void) startQuiz {
     if (_state == BYGameQuizState_Paused) {
         _quizStartTimeInterval = [NSDate timeIntervalSinceReferenceDate];
-        _quizFailTimer         = [NSTimer scheduledTimerWithTimeInterval:_quizPauseTimeLeft
-                                                                  target:self
-                                                                selector:@selector(quizFailHandler)
-                                                                userInfo:NULL
-                                                                 repeats:NO];
+        [self performSelector:@selector(quizFailHandler)
+                   withObject:NULL
+                   afterDelay:_quizPauseTimeLeft];
+
         _state                 = BYGameQuizState_Running;
     } else {
         BYLOG(@"cant continue quiz, its not in paused state");
@@ -114,18 +116,19 @@ const   NSUInteger          CBY_MaxDistance            =   226;  /// sqrt( 2 * 1
 
 
 - (void) startNewQuiz {
-    [_quizFailTimer invalidate];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self
+                                             selector:@selector(quizFailHandler)
+                                               object:NULL];
     
     NSAssert( [self canStartNewQuiz],
              @"Trying to start quiz, start new game first, or check for quiz counter");
     
     _quizStartTimeInterval = [NSDate timeIntervalSinceReferenceDate];
 
-    _quizFailTimer         = [NSTimer scheduledTimerWithTimeInterval:TimePerQuiz
-                                                              target:self
-                                                   selector:@selector(quizFailHandler)
-                                                            userInfo:NULL
-                                                             repeats:NO];
+    [self performSelector:@selector(quizFailHandler)
+               withObject:NULL
+               afterDelay:TimePerQuiz];
+
     _quiz                  = [_quizDataWrapper randomQuizWithDifficulty: [self _currentQuizDifficulty]];
     _pointsGainedForLastQuiz = 0;
     _quizPauseTimeLeft     = 0;
@@ -142,8 +145,6 @@ const   NSUInteger          CBY_MaxDistance            =   226;  /// sqrt( 2 * 1
 
 
 - (void) processQuizAnswerCoordinate:(CLLocationCoordinate2D)coordinate {
-    
-    [_quizFailTimer invalidate];
     
     /// process quiz, get poins
     _pointsForLastQuiz = [self _pointsForQuiz: _quiz
@@ -196,8 +197,14 @@ const   NSUInteger          CBY_MaxDistance            =   226;  /// sqrt( 2 * 1
 }
 
 
-- (void) dealloc {
-    [_quizFailTimer invalidate];
+- (void) quitQuiz {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self
+                                             selector:@selector(quizFailHandler)
+                                               object:NULL];
 }
 
+
+- (void) dealloc {
+    
+}
 @end

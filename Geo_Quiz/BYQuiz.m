@@ -70,4 +70,8 @@
     }
     return NULL;
 }
+
+- (void) dealloc {
+    
+}
 @end

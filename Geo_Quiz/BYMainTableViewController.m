@@ -7,6 +7,7 @@
 //
 
 #import "BYMainTableViewController.h"
+#import "BYLeaderBoardTableViewController.h"
 
 @interface BYMainTableViewController ()
 
@@ -154,8 +155,9 @@ NSString * const SigOptions = @"sOptions";
         case BYMainMenuStartGame:
             sigId = SigMap;
             break;
-        case BYMainMenuLeaderBoard:
+        case BYMainMenuLeaderBoard: {
             sigId = SigLeaderBoard;
+        }
             break;
         case BYMainMenuOptions:
             sigId = SigOptions;

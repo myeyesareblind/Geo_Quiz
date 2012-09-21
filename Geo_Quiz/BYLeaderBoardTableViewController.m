@@ -149,8 +149,10 @@
 }
 
 - (void)backNavigationItemHandler:(id)sender {
-    
-    [self performSegueWithIdentifier:SigToMain
-                              sender:self];
+    [self.navigationController.presentingViewController dismissModalViewControllerAnimated:YES];
+}
+
+- (void) dealloc {
+    NSLog(@"%s:%d", __func__, __LINE__);
 }
 @end

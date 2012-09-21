@@ -29,6 +29,7 @@ const int   CBY_annotationQuestionMark      = 5412;
 - (void) _removeMapViewAnnotations;
 - (void) _addQuestionMarkAnnotationAtPoint: (CLLocationCoordinate2D) pnt;
 - (void) _addExlamationMarkAnnotationAtPoint: (CLLocationCoordinate2D) pnt;
+- (void) _initGame;
 
 
 - (void) pauseGame;
@@ -48,16 +49,7 @@ const int   CBY_annotationQuestionMark      = 5412;
 - (id) initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        _gameEngine = [[BYGameEngine alloc] init];
-        _gameEngine.delegate = self;
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(applicationDidEnterBackGround)
-                                                     name:NBY_ApplicationDidEnterBackGround
-                                                   object:NULL];
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(applicationDidEnterForeGround)
-                                                     name:NBY_ApplicationDidEnterForeGround
-                                                   object:NULL];
+        [self _initGame];
     }
     return self;
 }
@@ -66,20 +58,34 @@ const int   CBY_annotationQuestionMark      = 5412;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        [self _initGame];
         // Custom initialization
-        _gameEngine = [[BYGameEngine alloc] init];
-        _gameEngine.delegate = self;
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(applicationDidEnterBackGround)
-                                                     name:NBY_ApplicationDidEnterBackGround
-                                                   object:[[UIApplication sharedApplication] delegate]];
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(applicationDidEnterForeGround)
-                                                     name:NBY_ApplicationDidEnterForeGround
-                                                   object:[[UIApplication sharedApplication] delegate]];
-
     }
     return self;
+}
+
+- (void) _initGame {
+    
+    _gameEngine = [[BYGameEngine alloc] init];
+    _gameEngine.delegate = self;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationDidEnterBackGround)
+                                                 name:NBY_ApplicationDidEnterBackGround
+                                               object:NULL];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationDidEnterForeGround)
+                                                 name:NBY_ApplicationDidEnterForeGround
+                                               object:NULL];
+
+    
+    [_gameEngine startNewGame];
+    [_gameEngine startNewQuiz];
+    
+    _viewRefreshTimer = [NSTimer scheduledTimerWithTimeInterval:CBY_viewUpdateTimerInterval
+                                                         target:self
+                                                       selector:@selector(_updateViews)
+                                                       userInfo:NULL
+                                                        repeats:YES];
 }
 
 
@@ -88,7 +94,7 @@ const int   CBY_annotationQuestionMark      = 5412;
     [super viewDidLoad];
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                  action:@selector(tapGestureHandle:)];
-
+    
     [_mapView addGestureRecognizer: tapGesture];
 }
 
@@ -107,23 +113,6 @@ const int   CBY_annotationQuestionMark      = 5412;
 
 /// main routine to retrieve bgd state and initial run
 - (void) viewWillAppear:(BOOL)animated {
-    if (_gameEngine.gameQuizState == BYGameQuizState_NotStarted) {
-    /// some timer to indicate game start
-        [_gameEngine startNewGame];
-        [_gameEngine startNewQuiz];
-        
-        _viewRefreshTimer = [NSTimer scheduledTimerWithTimeInterval:CBY_viewUpdateTimerInterval
-                                                             target:self
-                                                           selector:@selector(_updateViews)
-                                                           userInfo:NULL
-                                                            repeats:YES];
-    } else if (_gameEngine.gameQuizState == BYGameQuizState_Paused) {
-        
-    } else if (_gameEngine.gameQuizState == BYGameQuizState_Running) {
-        
-    } else {
-            
-    }
 }
 
 
@@ -134,8 +123,14 @@ const int   CBY_annotationQuestionMark      = 5412;
 
 
 - (IBAction)quitButtonHandler:(id)sender {
-    [self performSegueWithIdentifier:SigToMain
-                              sender:self];
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
+    [_gameEngine quitQuiz];
+    
+    [_viewRefreshTimer invalidate];
+    _viewRefreshTimer = NULL;
+    
+    _onQuizFinishedBlock = NULL;
+    [self.presentingViewController dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)helpButtonHandler:(id)sender {
@@ -207,7 +202,7 @@ const int   CBY_annotationQuestionMark      = 5412;
 
     __weak BYGameEngine *gn = _gameEngine;
     
-    _onQuizFinishedSelector = ^{
+    _onQuizFinishedBlock = ^{
     NSString *pointsInformation = [NSString stringWithFormat: NSLocalizedString(@"kPoint gained %d", NULL), _gameEngine.pointsForLastQuiz ];
     
     /// show alertView with points gained and next button
@@ -231,7 +226,7 @@ const int   CBY_annotationQuestionMark      = 5412;
     __weak BYGameEngine *gn = _gameEngine;
     __weak BYQuizViewController *weakSelf = self;
     /// wait for scroll animation of mapview to finish
-    _onQuizFinishedSelector = ^{
+    _onQuizFinishedBlock = ^{
     NSString *pointsInformation = [NSString stringWithFormat: NSLocalizedString(@"kPoint gained %d", NULL), _gameEngine.pointsForLastQuiz ];
             
     /// show alertView with points gained and next button
@@ -266,8 +261,8 @@ const int   CBY_annotationQuestionMark      = 5412;
 - (void) BYGameEngineProcessQuizAnswerCoordinateAnimation:(CLLocationCoordinate2D)quizAnswerCoord {
     [self _addExlamationMarkAnnotationAtPoint: quizAnswerCoord];
     if ( CLLocationCoordinateAreEqual(_mapView.centerCoordinate, quizAnswerCoord) ) {
-        _onQuizFinishedSelector();
-        _onQuizFinishedSelector = NULL;
+        _onQuizFinishedBlock();
+        _onQuizFinishedBlock = NULL;
     } else {
         [_mapView setCenterCoordinate: quizAnswerCoord
                              animated: YES];
@@ -299,9 +294,9 @@ const int   CBY_annotationQuestionMark      = 5412;
 
 - (void) mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
     if (animated) {
-        if (_onQuizFinishedSelector) {
-            _onQuizFinishedSelector();
-            _onQuizFinishedSelector = NULL;
+        if (_onQuizFinishedBlock) {
+            _onQuizFinishedBlock();
+            _onQuizFinishedBlock = NULL;
         }
     }
 }
@@ -332,6 +327,6 @@ const int   CBY_annotationQuestionMark      = 5412;
 
 
 - (void) dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver: self];
+    
 }
 @end

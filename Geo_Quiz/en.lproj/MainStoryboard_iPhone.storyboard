@@ -70,9 +70,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Leader Board" id="aCN-al-i7E"/>
-                    <connections>
-                        <segue destination="qe2-yK-onV" kind="custom" identifier="sToMain" customClass="BYMainScreenSegue" id="As4-2e-ufM"/>
-                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1044" y="138"/>
@@ -102,9 +99,6 @@
                             <outlet property="delegate" destination="B3e-lh-3sa" id="1cg-OC-UAK"/>
                         </connections>
                     </tableView>
-                    <connections>
-                        <segue destination="qe2-yK-onV" kind="custom" identifier="sToMain" customClass="BYMainScreenSegue" id="6K1-z4-XbV"/>
-                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="534" y="755"/>
@@ -194,7 +188,6 @@
                         <outlet property="quitButton" destination="5FF-ez-Tqf" id="CxM-6A-5Rq"/>
                         <outlet property="quizTaskLabel" destination="W7v-SL-Yql" id="bDg-uY-4Pp"/>
                         <outlet property="timerLabel" destination="vxg-9p-Gdz" id="bFL-28-XD8"/>
-                        <segue destination="qe2-yK-onV" kind="custom" identifier="sToMain" customClass="BYMainScreenSegue" id="gbm-XY-YlB"/>
                     </connections>
                 </viewController>
             </objects>
@@ -227,14 +220,37 @@
                     </tableView>
                 </tableViewController>
             </objects>
+            <point key="canvasLocation" x="-145" y="780"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="BYLeaderBoardTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BYLeaderBoardTableViewController.h"/>
+        </class>
+        <class className="BYMainTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BYMainTableViewController.h"/>
+        </class>
+        <class className="BYQuizViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BYQuizViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="helpButtonHandler:"/>
+                <relationship kind="action" name="pauseButtonHandler:"/>
+                <relationship kind="action" name="quitButtonHandler:"/>
+                <relationship kind="outlet" name="helpButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="pauseButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="quitButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="quizTaskLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="timerLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="BYSettingsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BYSettingsViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="As4-2e-ufM"/>
-    </inferredMetricsTieBreakers>
 </document>

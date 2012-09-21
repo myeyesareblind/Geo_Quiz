@@ -30,7 +30,6 @@ typedef enum  {
     NSUInteger          _pointsGained;
     NSUInteger          _pointsGainedForLastQuiz;
     NSUInteger          _numberQuiz;
-    NSTimer*            _quizFailTimer;
     BYGameQuizState     _state;
 }
 
@@ -42,6 +41,7 @@ typedef enum  {
 
 - (void) startNewGame;
 - (void) startNewQuiz;
+- (void) quitQuiz;
 
 - (BOOL) canStartNewQuiz;
 - (void) processQuizAnswerCoordinate: (CLLocationCoordinate2D) coordinate; /// user tapped mapView

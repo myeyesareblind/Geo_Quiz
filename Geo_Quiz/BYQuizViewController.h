@@ -19,7 +19,7 @@ typedef void (^Block)();
     BYGameEngine*       _gameEngine;
     NSTimer*            _viewRefreshTimer;
 
-    Block               _onQuizFinishedSelector;
+    Block               _onQuizFinishedBlock;
 }
 
 @property (nonatomic, weak) IBOutlet UIButton*      quitButton;
